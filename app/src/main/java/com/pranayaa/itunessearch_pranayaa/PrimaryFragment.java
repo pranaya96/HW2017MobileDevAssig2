@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,17 @@ public class PrimaryFragment extends Fragment {
     private String mCurrentlyPlayingUrl;
     private String queryTerm;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 
+        queryTerm = getArguments().getString("data");
+        Log.i("sa", queryTerm);
+        mMediaPlayer = new MediaPlayer();
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+    }
 
 
     @Override
@@ -60,15 +71,7 @@ public class PrimaryFragment extends Fragment {
         }
         return v;
     }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-//        queryTerm = getArguments().getString("data");
-        mMediaPlayer = new MediaPlayer();
-        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
-    }
 
     private void clickedAudioURL(String url) {
         if (mMediaPlayer.isPlaying()) {
@@ -187,8 +190,7 @@ public class PrimaryFragment extends Fragment {
             boolean isPlaying = mMediaPlayer.isPlaying() &&
                     mCurrentlyPlayingUrl.equals(itunesTrack.getmPreviewUrl());
             // Here, add code to set the play/pause button icon based on isPlaying
-
-
+            
             if (isPlaying){
                 playButton.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_media_pause));
             }else{

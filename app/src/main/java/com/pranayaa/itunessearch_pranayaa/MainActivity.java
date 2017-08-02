@@ -14,19 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-         //Set the fragment into the container.
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment existingFragment = fm.findFragmentById(R.id.container);
-        if (existingFragment == null) {
-            Fragment itunesTrackListFragment = new PrimaryFragment();
-            fm.beginTransaction().replace(R.id.container, itunesTrackListFragment).commit();
-        }
     }
 
     @Override
